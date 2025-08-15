@@ -21,10 +21,11 @@ export const COLORS = {
 //  cardGradient: ['#101821', '#101821']
 
 ,card:"#29343d",
-cardOpacity: "rgba(30, 40, 48, 0.9)",
+cardOpacity: "rgba(30, 40, 48, 0.8)",
 
 background:"#1e2025",
 circle:"#29343d",
+secondaryText:"white",
 
 }
 

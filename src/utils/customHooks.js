@@ -21,3 +21,14 @@ export function formatMilliseconds(ms) {
 
   return `${hours}:${minutes}:${seconds}`;
 }
+export function generateRandomId(length) {
+  let result = '';
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return result;
+}
+
