@@ -1,53 +1,43 @@
-import {StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import { StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withDelay,
   withRepeat,
   withTiming,
+  cancelAnimation,
 } from 'react-native-reanimated';
 import { COLORS } from '../variables/styles';
 
 const SIZE = 100;
 const COLOR = COLORS.activeBackground;
 
-
-export const Ring = (props) => {
-  const {index} = props;
+export const Ring = ({ index, animate = true }) => {
   const opacityValue = useSharedValue(0.7);
   const scaleValue = useSharedValue(1);
 
   useEffect(() => {
-    opacityValue.value = withDelay(
-      index * 400,
-      withRepeat(
-        withTiming(0, {
-          duration: 2000,
-        }),
-        -1,
-        false,
-      ),
-    );
-    scaleValue.value = withDelay(
-      index * 400,
-      withRepeat(
-        withTiming(3, {
-          duration: 2000,
-        }),
-        -1,
-        false,
-      ),
-    );
-  }, [opacityValue, scaleValue, index]);
+    if (animate) {
+      opacityValue.value = withDelay(
+        index * 400,
+        withRepeat(withTiming(0, { duration: 2000 }), -1, false)
+      );
+      scaleValue.value = withDelay(
+        index * 400,
+        withRepeat(withTiming(3, { duration: 2000 }), -1, false)
+      );
+    } else {
+      cancelAnimation(opacityValue);
+      cancelAnimation(scaleValue);
+      opacityValue.value = 0.7;
+      scaleValue.value = 1;
+    }
+  }, [index, animate]);
 
   const rStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          scale: scaleValue.value,
-        },
-      ],
+      transform: [{ scale: scaleValue.value }],
       opacity: opacityValue.value,
     };
   });
@@ -64,4 +54,3 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
-

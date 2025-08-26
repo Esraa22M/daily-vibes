@@ -15,7 +15,7 @@ export const COLORS = {
   brightBlue: '#33d6ff',
   brightRed: '#ff5555',
     backgroundGradient: ['#1A3D63', "#0A1931"],
-    borderColor:"#9C7248",
+    borderColor:"#8A7E78",
      cardGradient: ['#4A7FA7', '#707070'],
  activeBackground:"#5a7480"
 //  cardGradient: ['#101821', '#101821']

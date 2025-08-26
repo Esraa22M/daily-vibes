@@ -26,6 +26,7 @@ export const isStorageEnabled = async () => {
 		return false;
 	}
 };
+
 export const storeDayItems = async (items) => {
 	return storeData("dayVibes", items);
 };

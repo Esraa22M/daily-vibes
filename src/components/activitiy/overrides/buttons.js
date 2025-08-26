@@ -1,39 +1,54 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 import { COLORS } from "../../../variables/styles";
 
-export const CustomButton = ({ text, type = "primary", isGhost = false, disabled = false, ...rest }) => {
+export const CustomButton = ({
+	text,
+	type = "primary",
+	isGhost = false,
+	isDanger = false,
+	disabled = false,
+	outLineButton = false,
+	...rest
+}) => {
 	const ghostButton = isGhost;
 	const isDisabled = disabled;
 
 	let backgroundColor = COLORS.activeBackground;
 	let borderColor = COLORS.activeBackground;
 	let textColor = COLORS.secondaryText;
+	let borderWidth = 0;
 
-	if (ghostButton) {
+	if (outLineButton) {
 		backgroundColor = "transparent";
-		textColor = COLORS.activeBackground;
+		textColor = COLORS.text;
+		borderWidth = 1;
 		if (isDisabled) {
-			borderColor = "transparent";
 			textColor = COLORS.card;
-					borderWidth=1,
-
-				 borderColor = COLORS.card;
-
+			borderColor = COLORS.card;
+		}
+		if (isDanger) {
+			backgroundColor = "transparent";
+			textColor = COLORS.brightRed;
+			borderColor = COLORS.brightRed;
 		}
 	} else if (isDisabled) {
 		backgroundColor = COLORS.card;
-						 borderColor = COLORS.card;
-		borderWidth= 1,
-
-		textColor =  "grey";
+		borderColor = COLORS.card;
+		borderWidth = 1;
+		textColor = "grey";
+	} else if (isGhost) {
+		borderWidth = 0;
+		backgroundColor = "";
+		textColor = COLORS.activeBackground;
 	}
+
 	return (
 		<Pressable
 			{...rest}
 			disabled={isDisabled}
 			style={({ pressed }) => [
 				styles.button,
-				{ backgroundColor, borderColor },
+				{ backgroundColor, borderColor, borderWidth },
 				pressed && !isDisabled && { opacity: 0.6 },
 			]}
 		>
@@ -47,6 +62,8 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderRadius: 5,
 		alignItems: "center",
+		minWidth: 80,
 		justifyContent: "center",
+		alignSelf: "stretch",
 	},
 });

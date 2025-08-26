@@ -25,12 +25,26 @@ export const ItemCreate = ({visible,onclose, onConfirm}) => {
 				underlineColorAndroid={"transparent"}
 				autoCorrect={false}
 				onFocus={() => setIsFocus(true)}
+				value={newItem.title}
 				onBlur={() => setIsFocus(false)}
 				onChangeText={(title) => setNewItem({ ...newItem, title })}
 			/>
+			<TextInput
+				placeholder="Share the story behind your activity"
+				placeholderTextColor={COLORS.secondaryText}
+				cursorColor={isFocus ? COLORS.secondaryText : "transparent"}
+				style={[styles.input, isFocus && styles.inputFocus, styles.textArea]}
+				underlineColorAndroid={"transparent"}
+				autoCorrect={false}
+				multiline
+				value={newItem.description}
+				onFocus={() => setIsFocus(true)}
+				onBlur={() => setIsFocus(false)}
+				onChangeText={(description) => setNewItem({ ...newItem, description })}
+			/>
 			<FlowRow style={styles.buttonsWrapper}>
 				<CustomButton text={"Confirm"} onPress={confirm} type={"primary"} disabled={newItem.title.length === 0} />
-				<CustomButton text={"Cancel"} onPress={cancel} type={"primary"} isGhost={true} />
+				<CustomButton text={"Cancel"} onPress={cancel} type={"primary"} outLineButton />
 			</FlowRow>
 			{/* <FlowRow style={styles.buttonsWrapper}>
 				<Pressable
@@ -77,4 +91,5 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: "transparent",
 	},
+	textArea:{minHeight:100 , textAlignVertical:"top"}
 });
